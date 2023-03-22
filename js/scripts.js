@@ -85,6 +85,9 @@ window.onload = function() {
   document.body.appendChild(css);
 };
 
+let menu = document.querySelector("#menu-icon");
+let navbar = document.querySelector(".nav-list");
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     console.log(entry)
@@ -97,3 +100,8 @@ const observer = new IntersectionObserver((entries) => {
 });
 const animateElements = document.querySelectorAll(".animate");
 animateElements.forEach((el) => observer.observe(el));
+
+menu.onclick = () => {
+  menu.classList.toggle("bx-x");
+  navbar.classList.toggle("open");
+}
