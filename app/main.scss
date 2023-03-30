@@ -1,0 +1,715 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+// Color settings
+$bg-color: #0d0d0d;
+$primary-color: #191970;
+$card-color: #1919708f;
+$secondary-color: #1E90FF;
+$txt-color: #F8F8FF;
+$hover-color: #1e65ff;
+
+// Breaking points for responsiveness
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
+
+// Default settings
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  scroll-behavior: smooth;
+  transition: all .5s ease;
+}
+
+#tsparticles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+body {
+  background: $bg-color;
+  font-family: 'Poppins';
+}
+
+a {
+  color: $txt-color;
+  font-size: 1.1rem;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.container {
+  padding: 0 8%;
+}
+
+.animate {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-50%);
+  transition: all 1s ease;
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+
+
+// Header design
+header {
+  display: grid;
+  place-items: center;
+
+  // Navigation Design
+  .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 75px;
+    z-index: 1000;
+
+    // For the Logo image and Logo text
+    :nth-child(1) {
+      display: flex;
+      align-items: center;
+      gap: .2rem;
+    }
+
+    &.solid-nav {
+      background-color: $bg-color;
+      transition: background-color 0.2s linear;
+    }
+
+
+    .navbar {
+      display: flex;
+      gap: 1.8rem;
+      transition: all .5s ease;
+
+      a {
+        padding: 12px 0;
+        position: relative;
+
+        // Hover animation
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          width: 100%;
+          height: 2px;
+          background: $secondary-color;
+          transform: scaleX(0);
+          transition: transform .5s ease;
+          transform-origin: right;
+        }
+
+        &:hover {
+          color: $secondary-color;
+
+          &::before {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+    }
+
+    #menu-icon {
+      font-size: 30px;
+      cursor: pointer;
+      display: none;
+      color: $txt-color;
+
+    }
+  }
+
+  // Media query for the navbar
+  @media (max-width: $breakpoint-tablet) {
+    .nav-container {
+      background: $bg-color;
+
+      .navbar {
+        position: absolute;
+        top: 75px;
+        left: -100%;
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+        background: $bg-color;
+      }
+
+      .navbar.open {
+        left: 0;
+      }
+
+      #menu-icon {
+        display: block;
+      }
+    }
+  }
+
+  .hero-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    gap: 30px;
+  }
+
+  .hero-header {
+    overflow: hidden;
+
+    img {
+      height: 210px;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .hero-body {
+    text-align: center;
+    max-width: 900px;
+
+    h3 {
+      font-weight: 500;
+      color: $txt-color;
+    }
+
+    span {
+      font-size: 4.2rem;
+      font-weight: 500;
+      color: $txt-color;
+    }
+
+    p {
+      color: $txt-color;
+    }
+
+    .btn {
+      background: $secondary-color;
+      color: $txt-color;
+      font-size: 1rem;
+      border-radius: 50px;
+      border: none;
+      padding: 15px 40px;
+
+      &:hover {
+        cursor: pointer;
+        background: $hover-color;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    .hero-header {
+      img {
+        height: 150px;
+      }
+    }
+
+    .hero-body {
+      h3 {
+        font-size: 1rem;
+      }
+
+      span {
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: .9rem;
+      }
+
+      .btn {
+        background: $secondary-color;
+        color: $txt-color;
+        font-size: .9rem;
+        border-radius: 50px;
+        border: none;
+        padding: 13px 30px;
+      }
+    }
+  }
+}
+
+// About design
+.about-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  gap: 50px;
+
+  .about-header {
+    span {
+      font-size: 1.5rem;
+      color: $secondary-color;
+    }
+
+    h1 {
+      position: relative;
+      width: 190px;
+      font-size: 2.3rem;
+      font-weight: 500;
+      color: $txt-color;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        width: 100%;
+        height: 2px;
+        background: $secondary-color;
+      }
+    }
+  }
+
+  .about-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    color: $txt-color;
+    gap: 50px;
+
+    article {
+      display: grid;
+      gap: 20px;
+    }
+  }
+
+  .about-card {
+    text-align: center;
+
+    .bxs-graduation {
+      font-size: 100px;
+      color: $secondary-color;
+    }
+  }
+}
+
+// Skills design
+.skills-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  gap: 50px;
+
+  .skills-header {
+    span {
+      font-size: 1.5rem;
+      color: $secondary-color;
+    }
+
+    h1 {
+      position: relative;
+      width: 155px;
+      font-size: 2.3rem;
+      font-weight: 500;
+      color: $txt-color;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        width: 100%;
+        height: 2px;
+        background: $secondary-color;
+      }
+    }
+  }
+
+  .skill-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+
+
+    .card-header {
+      color: $txt-color;
+    }
+
+    .card-body {
+      display: grid;
+      grid-template-columns: 80px 80px 80px 80px;
+
+      img {
+        width: 80px;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    .skill-card {
+      place-items: center;
+      text-align: center;
+    }
+  }
+}
+
+// Project design
+.project-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 120vh;
+  gap: 50px;
+
+  .project-header {
+    span {
+      font-size: 1.5rem;
+      color: $secondary-color;
+    }
+
+    h1 {
+      position: relative;
+      width: 220px;
+      font-size: 2.3rem;
+      font-weight: 500;
+      color: $txt-color;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        width: 100%;
+        height: 2px;
+        background: $secondary-color;
+      }
+    }
+  }
+
+  .project-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+
+    .card {
+      display: grid;
+      gap: 20px;
+      padding: 20px;
+      background: $card-color;
+      border-radius: .5rem;
+
+      .card-header {
+        overflow: hidden;
+
+        img {
+          display: block;
+          width: 100%;
+          max-height: 300px;
+          aspect-ratio: 16 / 9;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+
+      .card-body {
+        display: grid;
+        color: $txt-color;
+        gap: 10px;
+
+        h5 {
+          color: $secondary-color;
+          line-height: 0;
+        }
+      }
+
+      &:hover {
+        img {
+          transform: scale(1.025);
+        }
+      }
+    }
+  }
+}
+
+// Contact design
+.contact-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 120vh;
+  gap: 50px;
+
+  .contact-header {
+    span {
+      font-size: 1.5rem;
+      color: $secondary-color;
+    }
+
+    h1 {
+      position: relative;
+      width: 250px;
+      font-size: 2.3rem;
+      font-weight: 500;
+      color: $txt-color;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        width: 100%;
+        height: 2px;
+        background: $secondary-color;
+      }
+    }
+  }
+
+  .contact-card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    color: $txt-color;
+    gap: 50px;
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    .card-contact {
+      display: grid;
+      gap: 10px;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      #contact {
+        font-size: 2rem;
+      }
+    }
+
+    .card {
+      form {
+        display: grid;
+        place-items: center;
+        border-radius: .5rem;
+        background: $card-color;
+        padding: 40px 40px 20px 40px;
+
+        h1 {
+          font-size: 2rem;
+          font-weight: 500;
+        }
+
+        input[type=text],
+        input[type=email] {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin: 10px 0;
+
+        }
+
+        textarea {
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          width: 100%;
+          height: 150px;
+          resize: vertical;
+          font-family: Poppins;
+          margin: 10px 0;
+        }
+
+        input[type=submit] {
+          background: $secondary-color;
+          color: $txt-color;
+          border-radius: 4px;
+          border: none;
+          padding: 12px;
+          width: 100%;
+          margin: 10px 0;
+
+          &:hover {
+            cursor: pointer;
+            background: $hover-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+// footer
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background: $bg-color;
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    padding: 50px 0;
+    gap: 25px;
+
+    .footer-logo {
+      a {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+
+    .footer-link {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        img {
+          width: 30px;
+        }
+      }
+    }
+  }
+}
+
+
+// Font re-adjust design
+@media (max-width: $breakpoint-tablet) {
+  header {
+    a {
+      font-size: .9rem;
+    }
+  }
+
+  .about-section {
+    height: auto;
+    padding: 100px 0;
+
+    .about-header {
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+
+    .about-body {
+      font-size: .9rem;
+    }
+
+    .about-card {
+      grid-template-columns: repeat(1, 1fr);
+
+      h3 {
+        font-size: .9rem;
+      }
+
+      .bxs-graduation {
+        font-size: 100px;
+      }
+    }
+  }
+
+  .skills-section {
+    height: auto;
+    padding: 100px 0;
+
+    .skills-header {
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+
+    .about-card {
+      h3 {
+        font-size: .9rem;
+      }
+    }
+  }
+
+  .project-section {
+    height: auto;
+    padding: 100px 0;
+
+    .project-header {
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+
+    .project-card {
+      grid-template-columns: repeat(1, 1fr);
+      font-size: .9rem;
+    }
+  }
+
+  .contact-section {
+    height: auto;
+    padding: 100px 0;
+
+    .contact-header {
+      h1 {
+        font-size: 1.3rem;
+      }
+    }
+
+    .contact-card {
+      font-size: .9rem;
+      grid-template-columns: repeat(1, 1fr);
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      .card {
+        form {
+          padding: 20px;
+
+          h1 {
+            font-size: 1.3rem;
+          }
+        }
+      }
+
+    }
+  }
+
+  footer {
+    .footer-main {
+      grid-template-columns: repeat(1, 1fr);
+      place-items: center;
+      text-align: center;
+
+      .footer-logo {
+        a {
+          font-size: .9rem;
+        }
+      }
+
+      .footer-link {
+        a {
+          font-size: .9rem;
+        }
+      }
+    }
+  }
+}
